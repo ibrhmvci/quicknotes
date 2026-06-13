@@ -3,7 +3,6 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 async function request(path, token, options = {}) {
   const res = await fetch(`${API_URL}${path}`, {
     ...options,
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,

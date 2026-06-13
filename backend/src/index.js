@@ -12,15 +12,16 @@ const app = express();
 const PORT = process.env.PORT ?? 5000;
 
 app.use(helmet());
+const frontendUrl = (process.env.FRONTEND_URL ?? 'http://localhost:5173').replace(/\/$/, '');
 app.use(cors({
-  origin: process.env.FRONTEND_URL ?? 'http://localhost:5173',
-  credentials: true,
+  origin: frontendUrl,
+  credentials: false,
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(clerkMiddleware({
   secretKey: process.env.CLERK_SECRET_KEY,
   publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
-  authorizedParties: [process.env.FRONTEND_URL ?? 'http://localhost:5173'],
+  authorizedParties: [frontendUrl],
 }));
 
 

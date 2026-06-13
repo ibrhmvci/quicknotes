@@ -36,7 +36,7 @@ export default function DashboardPage() {
       try {
         const token = await getTokenRef.current();
         const data  = await getNotes(token);
-        if (!cancelled) setNotes(data);
+        if (!cancelled) setNotes(Array.isArray(data) ? data : []);
       } catch {
         if (!cancelled) showToastRef.current('Failed to load notes. Please refresh.', 'error');
       } finally {
