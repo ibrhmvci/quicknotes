@@ -27,7 +27,7 @@ Welcome to the SaaS application workspace. This project uses React (Vite) for th
 - Build backend: `npm --prefix backend run build`
 
 ### Testing & Auditing
-- Run Playwright UI tests: `npx playwright test`
+- Run Playwright UI tests: `npx playwright test --config tests/playwright.config.js`
 - Run security audit: `npm audit` or `snyk test`
 
 ---
