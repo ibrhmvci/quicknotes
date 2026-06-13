@@ -1,0 +1,50 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Left brand panel */
+.brand {
+  background: linear-gradient(135deg, var(--color-primary) 0%, hsl(260, 70%, 45%) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  padding: var(--space-12);
+  text-align: center;
+}
+
+.brandLogo { color: hsla(0, 0%, 100%, 0.9); }
+
+.brandTagline {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  color: var(--color-text-inverse);
+  line-height: var(--leading-tight);
+}
+
+/* Right form panel */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12) var(--space-8);
+  background: var(--color-surface);
+}
+
+.formSub {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+  text-align: center;
+}
+
+/* Hide brand panel on mobile, show form full-width */
+@media (max-width: 1024px) {
+  .page { grid-template-columns: 1fr; }
+  .brand { display: none; }
+  .form { padding: var(--space-8) var(--space-4); min-height: 100vh; }
+}

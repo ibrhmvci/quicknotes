@@ -1,0 +1,30 @@
+# Environment — never commit real secrets
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Prisma generated client (regenerated via prisma generate)
+backend/node_modules/.prisma/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
+
+# Claude Code local settings (machine-specific)
+.claude/
+
+# Playwright run artifacts
+test-results/
+playwright-report/
+
+# QA screenshots (generated, not source — run tests to regenerate)
+docs/qa/screenshots/

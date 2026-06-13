@@ -1,0 +1,147 @@
+/* ============================================================
+   DESIGN SYSTEM — QuickNotes
+   All variables from docs/design/screens.md §1
+   ============================================================ */
+
+:root {
+  /* Brand */
+  --color-primary:        hsl(243, 75%, 59%);
+  --color-primary-hover:  hsl(243, 75%, 50%);
+  --color-primary-light:  hsl(243, 75%, 95%);
+
+  /* Neutrals */
+  --color-bg:             hsl(220, 20%, 98%);
+  --color-surface:        hsl(0, 0%, 100%);
+  --color-border:         hsl(220, 13%, 91%);
+  --color-border-focus:   hsl(243, 75%, 59%);
+
+  /* Text */
+  --color-text-primary:   hsl(222, 47%, 11%);
+  --color-text-secondary: hsl(220, 9%, 46%);
+  --color-text-inverse:   hsl(0, 0%, 100%);
+
+  /* Semantic */
+  --color-danger:         hsl(0, 72%, 51%);
+  --color-danger-hover:   hsl(0, 72%, 43%);
+  --color-danger-light:   hsl(0, 72%, 95%);
+  --color-success:        hsl(142, 71%, 45%);
+  --color-warning:        hsl(38, 92%, 50%);
+
+  /* Shadows */
+  --shadow-sm:  0 1px 2px hsla(222, 47%, 11%, 0.06);
+  --shadow-md:  0 4px 12px hsla(222, 47%, 11%, 0.10);
+  --shadow-lg:  0 8px 32px hsla(222, 47%, 11%, 0.14);
+  --shadow-xl:  0 20px 60px hsla(222, 47%, 11%, 0.18);
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --font-normal:   400;
+  --font-medium:   500;
+  --font-semibold: 600;
+  --font-bold:     700;
+  --leading-tight:   1.25;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.75;
+
+  /* Spacing */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* Border radius */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast:   150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow:   400ms ease;
+}
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-normal);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg { display: block; max-width: 100%; }
+button { cursor: pointer; font-family: inherit; }
+input, textarea { font-family: inherit; }
+a { color: inherit; text-decoration: none; }
+
+#root { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ============================================================
+   SHIMMER ANIMATION (skeleton cards)
+   ============================================================ */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-border) 25%,
+    var(--color-bg) 50%,
+    var(--color-border) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ============================================================
+   MODAL ANIMATIONS
+   ============================================================ */
+@keyframes backdropIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes backdropOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes panelIn     { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ============================================================
+   TOAST ANIMATIONS
+   ============================================================ */
+@keyframes toastIn  { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
+@keyframes toastOut { from { opacity: 1; } to { opacity: 0; } }
+
+/* ============================================================
+   SPIN (loading button)
+   ============================================================ */
+@keyframes spin { to { transform: rotate(360deg); } }
