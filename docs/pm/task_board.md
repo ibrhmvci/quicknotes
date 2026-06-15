@@ -1,7 +1,7 @@
 # Project Manager Kanban Board (task_board.md)
 
 **Project**: QuickNotes — Authenticated Note-Taking App  
-**Status**: Phase 5 Complete — Awaiting user visual verification with real Clerk key  
+**Status**: Phase M6 In Progress — Maestro flows written, awaiting user run on device  
 **Last Updated**: 2026-06-13
 
 ---
@@ -95,8 +95,76 @@
 
 ---
 
+---
+
+## 📱 MOBILE APP LIFECYCLE — Android (React Native + Expo)
+
+---
+
+## 📱 Phase M1 — Mobile Spec ✅ REUSE (BA spec covers core CRUD + auth)
+- [x] BA spec already defines notes CRUD, Clerk auth, API endpoints
+- [x] Backend API already live on Railway — mobile will reuse same endpoints
+- [x] Auth: `@clerk/clerk-expo` for mobile session management
+
+---
+
+## 🎨 Phase M2 — Mobile UX/UI Design (Designer) ✅ COMPLETE
+- [x] DES-M01: Add mobile section to docs/design/screens.md (1,331 lines appended)
+- [x] DES-M02: Design system (dark theme #0f0f0f, MD3 color palette, dp spacing)
+- [x] DES-M03: Portrait wireframes for all 8 screens + Profile screen (ASCII ~390dp)
+- [x] DES-M04: Bottom tab nav (Notes + Profile) + FAB (56dp bottom-right)
+- [x] DES-M05: Bottom sheet for note card context menu (Edit/Delete)
+- [x] DES-M06: Thumb-zone diagram — FAB + tabs in natural zone
+- [x] DES-M07: Clerk Expo auth flow (useSignIn/useSignUp, SecureStore tokenCache)
+
+---
+
+## 📱 Phase M3 — Mobile Development (Mobile Agent) ✅ COMPLETE
+- [x] MOB-01: Scaffold Expo project in mobile/ (expo-router, TypeScript) — 43 files
+- [x] MOB-02: Configure Clerk Expo auth provider (tokenCache via SecureStore)
+- [x] MOB-03: Build navigation (bottom tabs: Notes + Profile, Stack + modal)
+- [x] MOB-04: Build HomeScreen (FlatList, pull-to-refresh, FAB, swipe-to-delete+undo)
+- [x] MOB-05: Build NoteEditorScreen (create + edit modes, unsaved-changes BackHandler)
+- [x] MOB-06: Build auth screens (Sign In email+OTP+OAuth, Sign Up, Landing)
+- [x] MOB-07: Wire all API calls to Railway backend (Bearer token via lib/api.ts)
+- [x] MOB-08: Build EmptyState, SkeletonCard, Snackbar, ContextBottomSheet components
+
+---
+
+## 🔍 Phase M4 — Code Review: Mobile ✅ APPROVED (Round 2 — 9/10)
+- [x] REV-MOB-01: Round 1 review — 6.5/10, NEEDS FIXES (5 critical + 2 major issues)
+- [x] REV-MOB-02: Mobile Dev applied all 7 fixes
+- [x] REV-MOB-03: Round 2 review — 9/10, APPROVED
+
+---
+
+## 🔒 Phase M5 — Security Audit: Mobile ✅ CLEAR (with advisories)
+- [x] SEC-MOB-01: SecureStore confirmed — AsyncStorage never imported
+- [x] SEC-MOB-02: Only API_URL + Clerk publishable key in EXPO_PUBLIC_ — both safe
+- [x] SEC-MOB-03: All API calls go through lib/api.ts with Bearer token — no bypasses
+- [x] SEC-MOB-FIX-01: HTTP fallback in api.ts replaced with hard throw (Medium — fixed)
+- [x] SEC-MOB-FIX-02: .env.example updated with HTTPS production note (Low — fixed)
+
+---
+
+## 🧪 Phase M6 — QA: Mobile (Maestro)
+- [x] QA-MOB-01: Write Maestro flows in tests/maestro/ — 6 flows: landing, sign-in, create, edit, delete, sign-out
+- [ ] QA-MOB-02 (USER): Run flows on Android device/emulator — `maestro test tests/maestro/`
+
+---
+
+## 🚀 Phase M7 — EAS Build + Play Store
+- [ ] EAS-01: Run Mobile Deploy Checklist
+- [ ] EAS-02: eas build --profile preview --platform android
+- [ ] EAS-03: User tests preview APK on device
+- [ ] EAS-04: eas build --profile production --platform android
+- [ ] EAS-05: Play Store Internal Testing submission
+
+---
+
 ## ✅ Done (Completed & Verified)
 - [x] Workspace hierarchy and rule definition bootstrap
 - [x] UX/UI Designer agent created (designer skill + rules)
-- [x] docs/design/screens.md created
+- [x] docs/design/screens.md created (web version)
 - [x] Kanban board restructured for full lifecycle workflow
+- [x] Web app fully built, reviewed, security-audited, QA-tested

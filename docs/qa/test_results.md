@@ -172,6 +172,59 @@ For each screen, navigate to the URL, set the viewport in DevTools (F12 → Togg
 
 ---
 
+---
+
+## Maestro Mobile Test Plan (Android)
+
+**Run Date:** Pending (requires Android device or emulator)  
+**App ID:** `com.quicknotes.app`  
+**Flow directory:** `tests/maestro/`  
+**Run command:** `maestro test tests/maestro/<flow>.yaml`  
+**Run all flows:** `maestro test tests/maestro/`
+
+### Setup Requirements
+
+1. Install Maestro CLI: `curl -Ls "https://get.maestro.mobile.dev" | bash`
+2. Connect Android device via USB (enable Developer Options + USB Debugging) **or** start an Android emulator
+3. Install the app via `eas build --profile development --platform android` and sideload the APK
+4. Create a Clerk test user in Clerk Dashboard (email: `test@example.com`, password: `TestPass123!`) and update credential placeholders in `02-sign-in.yaml`
+
+---
+
+### Maestro Flow Coverage
+
+| File | Flow | Screens Covered | Status |
+|------|------|-----------------|--------|
+| `01-landing.yaml` | Landing screen renders | Landing | ⬜ Not run |
+| `02-sign-in.yaml` | Email/password sign-in | Landing → Sign In → Home | ⬜ Not run |
+| `03-create-note.yaml` | Create new note via FAB | Home → Editor → Home | ⬜ Not run |
+| `04-edit-note.yaml` | Edit existing note by tap | Home → Editor → Home | ⬜ Not run |
+| `05-delete-note.yaml` | Delete via long-press bottom sheet | Home → Bottom Sheet → Alert → Home | ⬜ Not run |
+| `06-sign-out.yaml` | Sign out from Profile tab | Home → Profile → Landing | ⬜ Not run |
+
+### Interactions Covered
+
+- [x] Landing screen content and CTA buttons
+- [x] Email + password authentication (Clerk)
+- [x] FAB navigation to editor (create mode)
+- [x] Note title + content input and save
+- [x] Note card tap → editor (edit mode)
+- [x] Long-press → ContextBottomSheet ("Note options", "Edit note", "Delete note")
+- [x] Delete confirmation alert ("Delete Note?" → "Delete")
+- [x] Bottom tab navigation (Notes ↔ Profile)
+- [x] Sign out flow
+
+### Interactions NOT covered by automated Maestro flows (manual verification needed)
+
+- Swipe-to-delete with Undo snackbar (gesture-handler swipe, hard to automate in Maestro)
+- Pull-to-refresh (depends on live backend connection)
+- Discard changes alert (Cancel with unsaved edits)
+- OAuth sign-in (Google / GitHub — opens WebBrowser, not automatable in Maestro)
+- Empty state render (depends on account having zero notes)
+- Error state / network failure (requires simulated connectivity loss)
+
+---
+
 ## Bugs Found
 
 None — all 18 automated tests passed. Screens 4–8 (authenticated flows) require visual verification with a real Clerk key via the Claude browser extension.

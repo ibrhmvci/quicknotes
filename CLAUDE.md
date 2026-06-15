@@ -1,13 +1,16 @@
 # SaaS Project Developer Handbook (CLAUDE.md)
 
-Welcome to the SaaS application workspace. This project uses React (Vite) for the frontend, Node.js (Express) for the backend, PostgreSQL with Prisma ORM for database, Clerk for authentication, and Playwright for QA testing.
+This is the **QuickNotes** project. Each project lives in its own repo under `D:\vibes\`. New projects get their own folder at the same level (e.g., `D:\vibes\project-two\`).
+
+Tech stack: React (Vite) frontend, Node.js (Express) backend, PostgreSQL + Prisma ORM, Clerk auth, React Native + Expo mobile app, Playwright (web) / Maestro (mobile) for QA.
 
 ## Workspace Organization
 
-- `frontend/` - React SPA (Vite, CSS Variables, modern responsive layouts)
-- `backend/` - Node.js Express server (Prisma clients, API endpoints, Zod schema validation)
+- `frontend/` - React SPA (Vite, CSS Variables, modern responsive layouts) — deployed on Vercel
+- `backend/` - Node.js Express server (Prisma clients, API endpoints, Zod schema validation) — deployed on Railway
+- `mobile/` - React Native + Expo app (Android, Material Design 3) — distributed via Play Store
 - `docs/` - Documentation & Logs (maintained by PM, BA, Security, and QA roles)
-- `tests/` - Playwright browser automation tests
+- `tests/` - Playwright web tests + `tests/maestro/` Maestro mobile flows
 
 ---
 
