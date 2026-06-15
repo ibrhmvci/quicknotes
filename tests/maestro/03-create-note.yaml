@@ -1,0 +1,22 @@
+# Flow 03 — Create a new note
+# PREREQUISITE: Must be signed in. Run 02-sign-in.yaml first, or ensure
+# the test user session is already active (clearState: false).
+
+appId: com.quicknotes.app
+---
+- runFlow: ./02-sign-in.yaml
+- assertVisible: "My Notes"
+- tapOn:
+    label: "Create new note"
+- assertVisible: "Cancel"
+- assertVisible: "Save Note"
+- tapOn:
+    label: "Note title"
+- inputText: "Maestro Test Note"
+- tapOn:
+    label: "Note content"
+- inputText: "This note was created by a Maestro automated test."
+- tapOn:
+    text: "Save Note"
+- assertVisible: "My Notes"
+- assertVisible: "Maestro Test Note"

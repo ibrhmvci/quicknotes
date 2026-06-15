@@ -1,0 +1,26 @@
+# Flow 02 — Sign in with email + password
+# PREREQUISITE: A valid Clerk test user must exist in your Clerk dashboard.
+# Replace the email and password below with real test credentials before running.
+# Placeholder values will fail at the Clerk API step.
+#
+# Test credentials (set in Clerk dashboard → Users):
+#   Email:    test@example.com
+#   Password: TestPass123!
+
+appId: com.quicknotes.app
+---
+- launchApp:
+    clearState: true
+- assertVisible: "QuickNotes"
+- tapOn: "Sign In"
+- assertVisible: "Welcome back"
+- assertVisible: "Sign in to QuickNotes"
+- tapOn:
+    label: "Email"
+- inputText: "thenextfall@gmail.com"
+- tapOn:
+    label: "Password"
+- inputText: "TestPass135."
+- tapOn:
+    text: "Sign In"
+- assertVisible: "My Notes"

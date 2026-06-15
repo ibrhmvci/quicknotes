@@ -1,0 +1,12 @@
+# Flow 01 — Landing screen
+# Verifies the landing screen renders all expected content.
+# No credentials required.
+
+appId: com.quicknotes.app
+---
+- launchApp:
+    clearState: false
+- assertVisible: "QuickNotes"
+- assertVisible: "Your thoughts,\norganized."
+- assertVisible: "Get Started"
+- assertVisible: "Sign In"

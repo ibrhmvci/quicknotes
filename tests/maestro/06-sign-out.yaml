@@ -1,0 +1,14 @@
+# Flow 06 — Sign out from the Profile tab
+# PREREQUISITE: Must be signed in. Runs sign-in first then navigates to Profile.
+
+appId: com.quicknotes.app
+---
+- runFlow: ./02-sign-in.yaml
+- assertVisible: "My Notes"
+- tapOn:
+    text: "Profile"
+- assertVisible: "Profile"
+- tapOn:
+    label: "Sign out of QuickNotes"
+- assertVisible: "Sign In"
+- assertVisible: "QuickNotes"

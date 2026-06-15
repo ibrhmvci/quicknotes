@@ -1,0 +1,18 @@
+# Flow 04 — Edit an existing note
+# PREREQUISITE: Must be signed in with at least one note ("Maestro Test Note")
+# in the account. Run 03-create-note.yaml first to seed that note.
+
+appId: com.quicknotes.app
+---
+- runFlow: ./03-create-note.yaml
+- assertVisible: "My Notes"
+- tapOn: "Maestro Test Note"
+- assertVisible: "Save Changes"
+- tapOn:
+    label: "Note title"
+- eraseText: 50
+- inputText: "Maestro Edited Note"
+- tapOn:
+    text: "Save Changes"
+- assertVisible: "My Notes"
+- assertVisible: "Maestro Edited Note"

@@ -1,0 +1,17 @@
+# Flow 05 — Delete a note via long-press bottom sheet
+# PREREQUISITE: Must be signed in with "Maestro Edited Note" present.
+# Run 04-edit-note.yaml first to create and rename that note.
+
+appId: com.quicknotes.app
+---
+- runFlow: ./04-edit-note.yaml
+- assertVisible: "My Notes"
+- longPressOn: "Maestro Edited Note"
+- assertVisible: "Note options"
+- assertVisible: "Edit note"
+- assertVisible: "Delete note"
+- tapOn:
+    label: "Delete note"
+- assertVisible: "Delete Note?"
+- tapOn: "Delete"
+- assertNotVisible: "Maestro Edited Note"
