@@ -1,0 +1,60 @@
+appId: host.exp.exponent
+---
+# Open QuickNotes in Expo Go (update port if Expo restarts on a different one)
+- openLink: "exp://127.0.0.1:8082"
+- waitForAnimationToEnd
+
+# Dismiss Clerk dev banner if present
+- runFlow:
+    when:
+      visible:
+        text: "Clerk has been loaded"
+    commands:
+      - tapOn:
+          point: "92%,92%"
+      - waitForAnimationToEnd
+
+# Navigate to sign-in from landing
+- runFlow:
+    when:
+      visible:
+        text: "Get Started"
+    commands:
+      - tapOn: "Sign In"
+
+# If landed on sign-up by mistake, go to sign-in
+- runFlow:
+    when:
+      visible:
+        text: "Create your account"
+    commands:
+      - tapOn: "Sign in"
+
+- assertVisible: "Welcome back"
+
+# Sign in via Google (bypasses needs_client_trust for existing Google OAuth accounts)
+- tapOn: "Google"
+- takeScreenshot: after-google-tap
+
+# Google account picker may appear — select the account
+- runFlow:
+    when:
+      visible:
+        text: "Choose an account"
+    commands:
+      - tapOn: "thenextfall@gmail.com"
+      - waitForAnimationToEnd
+
+# Google consent screen may appear — tap Continue
+- runFlow:
+    when:
+      visible:
+        text: "Continue"
+    commands:
+      - tapOn: "Continue"
+      - waitForAnimationToEnd
+
+- extendedWaitUntil:
+    visible: "My Notes"
+    timeout: 20000
+- takeScreenshot: sign-in-success

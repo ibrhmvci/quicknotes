@@ -1,0 +1,36 @@
+appId: host.exp.exponent
+---
+# Reset to home screen
+- openLink: "exp://127.0.0.1:8082"
+- waitForAnimationToEnd
+
+# Dismiss Clerk dev banner if present
+- runFlow:
+    when:
+      visible:
+        text: "Clerk has been loaded"
+    commands:
+      - tapOn:
+          point: "92%,92%"
+      - waitForAnimationToEnd
+
+# Dismiss any open bottom sheet
+- runFlow:
+    when:
+      visible:
+        text: "Note options"
+    commands:
+      - pressKey: back
+      - waitForAnimationToEnd
+
+- assertVisible: "My Notes"
+
+# Go to Profile tab
+- tapOn: "Profile"
+
+# Sign out
+- tapOn: "Sign Out"
+
+# Assert back on landing
+- assertVisible: "QuickNotes"
+- takeScreenshot: sign-out-success

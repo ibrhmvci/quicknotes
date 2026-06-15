@@ -1,0 +1,161 @@
+appId: host.exp.exponent
+---
+# Reset to home screen
+- openLink: "exp://127.0.0.1:8082"
+- waitForAnimationToEnd
+
+# Dismiss Clerk dev banner if present
+- runFlow:
+    when:
+      visible:
+        text: "Clerk has been loaded"
+    commands:
+      - tapOn:
+          point: "92%,92%"
+      - waitForAnimationToEnd
+
+# Dismiss any open bottom sheet or modal
+- runFlow:
+    when:
+      visible:
+        text: "Note options"
+    commands:
+      - pressKey: back
+      - waitForAnimationToEnd
+
+# Sign in via Google if on landing screen
+- runFlow:
+    when:
+      visible:
+        text: "QuickNotes"
+    commands:
+      - tapOn: "Sign In"
+      - assertVisible: "Welcome back"
+      - tapOn: "Google"
+      - runFlow:
+          when:
+            visible:
+              text: "Choose an account"
+          commands:
+            - tapOn: "thenextfall@gmail.com"
+            - waitForAnimationToEnd
+      - runFlow:
+          when:
+            visible:
+              text: "Continue"
+          commands:
+            - tapOn: "Continue"
+            - waitForAnimationToEnd
+      - extendedWaitUntil:
+          visible: "My Notes"
+          timeout: 20000
+
+- assertVisible: "My Notes"
+
+# --- CLEANUP: delete any leftover test notes from previous runs ---
+- runFlow:
+    when:
+      visible:
+        text: "Maestro Test Note (edited)"
+    commands:
+      - longPressOn: "Maestro Test Note (edited)"
+      - waitForAnimationToEnd
+      - tapOn: "Delete note"
+      - tapOn: "Delete"
+      - waitForAnimationToEnd
+
+- runFlow:
+    when:
+      visible:
+        text: "Maestro Test Note (edited)"
+    commands:
+      - longPressOn: "Maestro Test Note (edited)"
+      - waitForAnimationToEnd
+      - tapOn: "Delete note"
+      - tapOn: "Delete"
+      - waitForAnimationToEnd
+
+- runFlow:
+    when:
+      visible:
+        text: "Maestro Test Note"
+    commands:
+      - longPressOn: "Maestro Test Note"
+      - waitForAnimationToEnd
+      - tapOn: "Delete note"
+      - tapOn: "Delete"
+      - waitForAnimationToEnd
+
+- runFlow:
+    when:
+      visible:
+        text: "Maestro Test Note"
+    commands:
+      - longPressOn: "Maestro Test Note"
+      - waitForAnimationToEnd
+      - tapOn: "Delete note"
+      - tapOn: "Delete"
+      - waitForAnimationToEnd
+
+# --- CREATE ---
+- tapOn:
+    id: "fab-create-note"
+- assertVisible: "Save Note"
+- tapOn:
+    text: "Enter a title..."
+- inputText: "Maestro Test Note"
+- tapOn:
+    text: "Write your note here..."
+- inputText: "Created by Maestro E2E test"
+- tapOn: "Save Note"
+- assertVisible: "Maestro Test Note"
+- takeScreenshot: note-created
+
+# --- PULL TO REFRESH ---
+- swipe:
+    start: "50%,40%"
+    end: "50%,80%"
+    duration: 800
+- waitForAnimationToEnd
+- assertVisible: "Maestro Test Note"
+- takeScreenshot: pull-to-refresh
+
+# --- LONG PRESS -> EDIT via Bottom Sheet ---
+- longPressOn: "Maestro Test Note"
+- assertVisible: "Edit note"
+- tapOn: "Edit note"
+- assertVisible: "Save Changes"
+- tapOn:
+    text: "Maestro Test Note"
+- eraseText: 200
+- inputText: "Maestro Test Note (edited)"
+- tapOn: "Save Changes"
+- assertVisible: "Maestro Test Note (edited)"
+- takeScreenshot: note-edited
+
+# --- SWIPE DELETE with UNDO ---
+- swipe:
+    direction: LEFT
+    element:
+      text: "Maestro Test Note (edited)"
+- waitForAnimationToEnd
+# Snackbar appears briefly — tap UNDO if visible, otherwise continue
+- runFlow:
+    when:
+      visible:
+        text: "UNDO"
+    commands:
+      - tapOn: "UNDO"
+      - waitForAnimationToEnd
+      - assertVisible: "Maestro Test Note (edited)"
+      - takeScreenshot: undo-worked
+
+# --- DELETE via Bottom Sheet (reliable) ---
+- longPressOn: "Maestro Test Note (edited)"
+- assertVisible: "Delete note"
+- tapOn: "Delete note"
+- tapOn: "Delete"
+- extendedWaitUntil:
+    notVisible: "Maestro Test Note (edited)"
+    timeout: 5000
+- takeScreenshot: note-deleted
